@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Rules\Password;
+use PhpParser\Node\Expr\FuncCall;
 
 class UserController extends Controller
 {
@@ -87,5 +88,13 @@ class UserController extends Controller
                 'error' => $error,
             ], 'Authentication Failed', 500);
         }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $data = $request->all();
+        $user = Auth::user();
+        $user->update($data);
+        return ResponseFormatter::success($user, 'Profile Updated');
     }
 }
