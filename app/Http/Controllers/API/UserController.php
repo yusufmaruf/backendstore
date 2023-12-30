@@ -9,11 +9,14 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Rules\Password;
 
 class UserController extends Controller
 {
+    public function fetch(Request $request)
+    {
+        return ResponseFormatter::success($request->user(), 'Data profile user berhasil diambil');
+    }
     public function login(Request $request)
     {
         try {
